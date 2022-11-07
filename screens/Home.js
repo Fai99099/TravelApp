@@ -21,7 +21,7 @@ const Mockdata = [
   {
     id: 2,
     banner: Random_Thumbnail(),
-    place: "RYD",
+    place: "JDH",
     country: "Saudi",
   },
 ];
@@ -47,6 +47,7 @@ const Home = ({ navigation }) => {
       <Text style={styles.subHeading}>RECENT TRIPS</Text>
       <View style={styles.listWrapper}>
         <FlatList
+        showsVerticalScrollIndicator={false}
           data={Mockdata}
           keyExtractor={(item) => item.id}
           numColumns={2}
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
   },
   addTripButt: {
     position: "absolute",
-    backgroundColor: "#a3b0b5",
+    backgroundColor: "rgba(120, 181, 204, 0.9)",
     margin: 3,
     paddingVertical: 7,
     paddingHorizontal: 18,
@@ -107,35 +108,36 @@ const styles = StyleSheet.create({
     left: Platform.OS === "ios" ? 300 : 250,
   },
   subHeading: {
-    fontSize: 18,
-    fontWeight: "500",
-    color: "black",
     top: 50,
     margin: 15,
+    fontSize: 18,
+      fontWeight:"700",
+      color:"gray",
   },
   tripBanner: {
-    height: 150,
-    width: 160,
-    resizeMode: "contain",
+    height: 180,
+    width: 165,
+    //resizeMode: "striped",
+    borderRadius:20,
   },
   place: {
     fontSize: 18,
     fontWeight: "700",
-    marginLeft: 6,
+    marginLeft: 17,
   },
   country: {
     fontSize: 17,
     fontWeight: "500",
-    marginLeft: 6,
+    marginLeft: 12,
   },
   listWrapper: {
     marginBottom: 120,
     height: 420,
     paddingTop: 70,
-    padding: 19,
+    padding: 20,
   },
   tripCard: {
-    backgroundColor: "#a3b0b5",
+    backgroundColor: "rgba(120, 181, 204, 0.2)",
     marginBottom: 12,
     padding: 8,
     borderRadius: 18,

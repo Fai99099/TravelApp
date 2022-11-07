@@ -10,9 +10,8 @@ export default ScreenWrapper;
 const styles = StyleSheet.create({
   screenWrapper: {
     paddingTop: Platform.OS === "ios" ? 0 : 20,
-    paddingHorizontal: 0,
     paddingBottom: 30,
-    backgroundColor: "white",
+    backgroundColor: "#f7f8fa",
     minHeight: "100%",
   },
 });
