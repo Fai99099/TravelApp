@@ -9,13 +9,27 @@ import React, { useState } from "react";
 import ScreenWrapper from "../components/screen-wrapper";
 import BackIcon from "react-native-vector-icons/Ionicons";
 import AddButton from "../components/add-butt";
+import { useDispatch } from "react-redux";
+import { addExpenses } from "../redux/slice/trips";
 const AddExpenses = ({ navigation, route }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
 
   const selectedTrip = route.params;
+  const dispatch=useDispatch();
   const handeleExpeneseAdded = () => {
+const expense={
+  id:DataTransfer.now(),
+  title,
+  amount,
+  category,
+}
+const data={
+  tripid: selectedTrip.id,
+  expense,
+}
+dispatch(addExpenses(data));
     navigation.navigate("Trip Expenses", selectedTrip);
   };
 
@@ -116,25 +130,36 @@ const styles = StyleSheet.create({
 marginRight:6,
 marginBottom:16,
 borderRadius:18,
+shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
   categoryOptions:{
     display: "flex",
     flexDirection:"row",
     marginTop:12,
     flexWrap: "wrap",
+    
   },
   categoryLabel:{
     fontSize:12,
     fontWeight:"600",
+    
   },
   form:{
    //marginVertical:34,
-   margin:25,
+   margin:30,
    //marginVertical:30,
-
+marginBottom:0,
   },
   formItem:{
-    marginVertical:-10, 
+    marginVertical:-14, 
     paddingBottom:50,
     
   },
@@ -152,5 +177,22 @@ borderRadius:18,
     fontWeight: "bold",
     color: "gray",
     paddingHorizontal: 17,
+  },
+  input:{
+backgroundColor:"white",
+marginTop:12,
+fontSize:16,
+padding:12,
+borderRadius:18,
+borderColor:"black",
+shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
 });

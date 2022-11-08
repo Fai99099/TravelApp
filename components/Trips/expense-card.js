@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
        flexDirection: "row",
        justifyContent: "space-between",
        alignItems: "center",
+
     },
     amount:{
         fontSize:16,
@@ -37,5 +38,6 @@ const styles = StyleSheet.create({
       fontSize:16,
       color:"#666",
       fontWeight:"500",
+      
     },
 })

@@ -9,23 +9,11 @@ import {
 } from "react-native";
 import React from "react";
 import ScreenWrapper from "../components/screen-wrapper";
-import { Random_Thumbnail, Thumbnails } from "../assets/assets";
 import EmptyList from "../components/home/empty-list";
-const Mockdata = [
-  {
-    id: 1,
-    banner: Random_Thumbnail(),
-    place: "RYD",
-    country: "Saudi",
-  },
-  {
-    id: 2,
-    banner: Random_Thumbnail(),
-    place: "JDH",
-    country: "Saudi",
-  },
-];
+import { useSelector } from "react-redux";
+
 const Home = ({ navigation }) => {
+  const tripList = useSelector(state=>state.trips.trips)
   return (
     <ScreenWrapper>
       <View>
@@ -48,7 +36,7 @@ const Home = ({ navigation }) => {
       <View style={styles.listWrapper}>
         <FlatList
         showsVerticalScrollIndicator={false}
-          data={Mockdata}
+          data={tripList}
           keyExtractor={(item) => item.id}
           numColumns={2}
           columnWrapperStyle={styles.tripList}
@@ -116,9 +104,10 @@ const styles = StyleSheet.create({
   },
   tripBanner: {
     height: 180,
-    width: 165,
+    width: 175,
     //resizeMode: "striped",
     borderRadius:20,
+   
   },
   place: {
     fontSize: 18,
@@ -132,15 +121,26 @@ const styles = StyleSheet.create({
   },
   listWrapper: {
     marginBottom: 120,
-    height: 420,
-    paddingTop: 70,
+    height: 620,
+    paddingTop: 50,
     padding: 20,
   },
   tripCard: {
+//     borderColor:"black",
+// shadowColor: "#000",
+//     shadowOffset: {
+//       width: 0,
+//       height: 1,
+//     },
+//     shadowOpacity: 0.9,
+//     shadowRadius: 2,
+//     backgroundColor:"white",
+//     elevation: 2,
     backgroundColor: "rgba(120, 181, 204, 0.2)",
     marginBottom: 12,
-    padding: 8,
+    padding: 0,
     borderRadius: 18,
+    
   },
   tripList: {
     justifyContent: "space-between",

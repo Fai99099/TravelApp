@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     },
     listWrapper: {
       marginBottom: 120,
-      height: 320,
+      height: 460,
       paddingTop: 0,
       padding: 0,
     },

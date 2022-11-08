@@ -5,6 +5,6 @@ export const category_BG={
     Residence:"rgba(245, 66, 224,0.3)",
     Transportation:"rgba(255, 102, 102,0.3)",
     Tickets:"rgba(66, 147, 245,0.3)",
-    Gifts:"rgba(252, 216, 109,0.3)",
+    Gifts:"rgba(84, 247, 2,0.3)",
     Other:"rgba(102, 255, 255,0.3)",
 }
