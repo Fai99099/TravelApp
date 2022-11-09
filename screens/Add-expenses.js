@@ -10,28 +10,34 @@ import ScreenWrapper from "../components/screen-wrapper";
 import BackIcon from "react-native-vector-icons/Ionicons";
 import AddButton from "../components/add-butt";
 import { useDispatch } from "react-redux";
-import { addExpenses } from "../redux/slice/trips";
-const AddExpenses = ({ navigation, route }) => {
-  const [title, setTitle] = useState("");
+import { addExpense } from "../redux/slice/trips";
+
+ const AddExpenses = ({ navigation, route }) => {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(0);
-
+  // const [categoryName, setCategoryName] = useState("");
+  // const [amountNumber, setAmountNumber] = useState(0);
   const selectedTrip = route.params;
-  const dispatch=useDispatch();
-  const handeleExpeneseAdded = () => {
-const expense={
-  id:DataTransfer.now(),
-  title,
-  amount,
-  category,
-}
-const data={
-  tripid: selectedTrip.id,
-  expense,
-}
-dispatch(addExpenses(data));
+
+  const dispatch = useDispatch();
+
+   const  handeleExpeneseAdded = () => {
+    const expense = {
+      id: Date.now(),
+      category,
+      amount, 
+    };
+    const data = {
+      tripId: selectedTrip.id,
+      expense,
+    };
+    //console.log("data",data);
+    console.log("selectedTrip",selectedTrip);
+    dispatch(addExpense(data));
     navigation.navigate("Trip Expenses", selectedTrip);
+    console.log("expenses",expense);
   };
+
 
   const Category = [
     "Food",
@@ -48,7 +54,8 @@ dispatch(addExpenses(data));
       <View
         style={{
           height: "100%",
-          justifyContent: "space-between",
+         justifyContent: "space-between",
+
         }}
       >
         <View
@@ -72,25 +79,38 @@ dispatch(addExpenses(data));
           <Text style={styles.subHeading}>Add New Expense</Text>
         </View>
         <View style={styles.form}>
-        <View style={styles.formItem}>
-          <Text style={styles.label}>Category</Text>
-          <View style={styles.categoryOptions}>
-            {Category.map((catg) => (
-              <TouchableOpacity style={{...styles.category,backgroundColor:category===catg?"rgba(120, 181, 204, 0.9)" :"white",}} 
-              onPress={() => setCategory(catg)}
-              >
-                <Text style={{
-                  ...styles.categoryLabel,
-                  color:category==catg?"white":"black",}}>{catg}</Text>
-              </TouchableOpacity>
-            ))}
+          <View style={styles.formItem}>
+            <Text style={styles.label}>Category</Text>
+            <View style={styles.categoryOptions}>
+              {Category.map(catg  => (
+                <View key={catg}>
+                <TouchableOpacity
+                  style={{
+                    ...styles.category,
+                    backgroundColor:
+                      category === catg ? "rgba(120, 181, 204, 0.9)" : "white",
+                  }}
+                  onPress={() => setCategory(catg)}
+                  
+                >
+                  <Text
+                    style={{
+                      ...styles.categoryLabel,
+                      color: category == catg ? "white" : "black",
+                    }}
+                  >
+                    {catg}
+                  </Text>
+                </TouchableOpacity>
+                </View>
+              ))}
             </View>
           </View>
           <View style={styles.formItem}>
             <Text style={styles.labelPrice}>How Much?</Text>
             <TextInput
               value={amount}
-              onChangeText={e => setAmount(Number(e))}
+              onChangeText={(e) => setAmount(Number(e))}
               style={styles.input}
             />
           </View>
@@ -124,13 +144,13 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     marginLeft: 100,
   },
-  category:{
+  category: {
     paddingVertical: 12,
-    paddingHorizontal:34,
-marginRight:6,
-marginBottom:16,
-borderRadius:18,
-shadowColor: "#000",
+    paddingHorizontal: 34,
+    marginRight: 6,
+    marginBottom: 16,
+    borderRadius: 18,
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -140,52 +160,50 @@ shadowColor: "#000",
 
     elevation: 2,
   },
-  categoryOptions:{
+  categoryOptions: {
     display: "flex",
-    flexDirection:"row",
-    marginTop:12,
+    flexDirection: "row",
+    marginTop: 12,
     flexWrap: "wrap",
-    
   },
-  categoryLabel:{
-    fontSize:12,
-    fontWeight:"600",
-    
+  categoryLabel: {
+    fontSize: 12,
+    fontWeight: "600",
   },
-  form:{
-   //marginVertical:34,
-   margin:30,
-   //marginVertical:30,
-marginBottom:0,
+  form: {
+   justifyContent: "space-between",
+    margin: 30,
+height: "45%",
+    marginBottom: 0,
+
   },
-  formItem:{
-    marginVertical:-14, 
-    paddingBottom:50,
-    
+  formItem: {
+    marginVertical: -14,
+    paddingBottom: 50,
   },
-  label:{
+  label: {
     paddingTop: 28,
     fontSize: 20,
     fontWeight: "bold",
     color: "gray",
     paddingHorizontal: 17,
   },
-  labelPrice:{
-   // paddingBottom:18,
-  
+  labelPrice: {
+    // paddingBottom:18,
+
     fontSize: 20,
     fontWeight: "bold",
     color: "gray",
     paddingHorizontal: 17,
   },
-  input:{
-backgroundColor:"white",
-marginTop:12,
-fontSize:16,
-padding:12,
-borderRadius:18,
-borderColor:"black",
-shadowColor: "#000",
+  input: {
+    backgroundColor: "white",
+    marginTop: 12,
+    fontSize: 16,
+    padding: 12,
+    borderRadius: 18,
+    borderColor: "black",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,

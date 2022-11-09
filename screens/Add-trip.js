@@ -10,11 +10,13 @@ import {Random_Thumbnail} from '../assets/assets';
 import {addTrip} from '../redux/slice/trips';
 const AddTrip = ({ navigation }) => {
   const [placeBaneer,setPlaceBanner]=useState();
-  const[isFocus,setIsFocus]=useState(false)
+  const [isFocus,setIsFocus]=useState(false)
   const [countryData, setCountryData]=useState([]);
   const [country,setCountry]=useState(null);
   const [cityData,setCityData]=useState([]);
   const [city,setCity]=useState(null);
+  const [countryName,setCountryName]=useState(null);
+  const [cityName,setCityName]=useState(null);
 
   useEffect(()=>{
 setPlaceBanner(Random_Thumbnail());
@@ -78,11 +80,12 @@ axios(config)
 }
 
 const dispatch=useDispatch();
+
  const handelAddTrip=()=>{
   const tripData={
     id: Date.now(),
-    country,
-    city,
+    country:countryName,
+    city:cityName,
     banner:placeBaneer,
     expenses:[],
   }
@@ -126,6 +129,7 @@ const dispatch=useDispatch();
     onChange={(item) => {
       setCountry(item.value);
       handelCity(item.value);
+      setCountryName(item.label);
       setIsFocus(false);
     }}
   />
@@ -149,6 +153,7 @@ const dispatch=useDispatch();
     onBlur={()=>setIsFocus(false)}
     onChange={(item) => {
       setCity(item.value);
+      setCityName(item.label);
       setIsFocus(false);
     }}
   />

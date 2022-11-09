@@ -13,7 +13,7 @@ import EmptyList from "../components/home/empty-list";
 import { useSelector } from "react-redux";
 
 const Home = ({ navigation }) => {
-  const tripList = useSelector(state=>state.trips.trips)
+  const tripList = useSelector(state=>state.trips.trips);
   return (
     <ScreenWrapper>
       <View>
@@ -37,7 +37,7 @@ const Home = ({ navigation }) => {
         <FlatList
         showsVerticalScrollIndicator={false}
           data={tripList}
-          keyExtractor={(item) => item.id}
+          keyExtractor={item => item.id}
           numColumns={2}
           columnWrapperStyle={styles.tripList}
           ListEmptyComponent={<EmptyList />}
@@ -45,7 +45,7 @@ const Home = ({ navigation }) => {
             <TouchableOpacity onPress={()=>navigation.navigate("Trip Expenses",item)}>
               <View style={styles.tripCard}>
                 <Image source={item.banner} style={styles.tripBanner} />
-                <Text style={styles.place}>{item.place}</Text>
+                <Text style={styles.city}>{item.city}</Text>
                 <Text style={styles.country}>{item.country}</Text>
               </View>
             </TouchableOpacity>
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius:20,
    
   },
-  place: {
+  city: {
     fontSize: 18,
     fontWeight: "700",
     marginLeft: 17,

@@ -1,8 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,Modal } from 'react-native'
 import React from 'react'
 import { category_BG } from '../../theme/theme'
-
+import EditIcon from "react-native-vector-icons/Ionicons";
 const ExpenseCard = ({expense}) => {
+  // const [edit, setEdit] = useState({
+  //   id: null,
+  //   value: 0
+  // });
+// const [expenseData, setdata] = useState(expense);
   return (
     <View style={{...styles.card,backgroundColor:category_BG[expense.category]}}>
     <View>
@@ -10,6 +15,8 @@ const ExpenseCard = ({expense}) => {
     </View>
     <View>
      <Text style={styles.amount}>{expense.amount} RS</Text>
+     
+   
     </View>
     </View>
   )
