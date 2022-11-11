@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View,Platform,FlatList } from 'react-native'
+import { StyleSheet, Text, View,Platform,FlatList, Alert } from 'react-native'
 import React,{useState,useEffect} from 'react'
 import ScreenWrapper from '../components/screen-wrapper'
 import BackIcon from 'react-native-vector-icons/Ionicons';
@@ -12,9 +12,9 @@ const AddTrip = ({ navigation }) => {
   const [placeBaneer,setPlaceBanner]=useState();
   const [isFocus,setIsFocus]=useState(false)
   const [countryData, setCountryData]=useState([]);
-  const [country,setCountry]=useState(null);
+  const [country,setCountry]=useState("");
   const [cityData,setCityData]=useState([]);
-  const [city,setCity]=useState(null);
+  const [city,setCity]=useState("");
   const [countryName,setCountryName]=useState(null);
   const [cityName,setCityName]=useState(null);
 
@@ -82,6 +82,7 @@ axios(config)
 const dispatch=useDispatch();
 
  const handelAddTrip=()=>{
+   if(country !== "" && city !== ""){
   const tripData={
     id: Date.now(),
     country:countryName,
@@ -89,9 +90,14 @@ const dispatch=useDispatch();
     banner:placeBaneer,
     expenses:[],
   }
-  dispatch(addTrip(tripData));
-  navigation.navigate('Home');
- }
+   dispatch(addTrip(tripData));
+   navigation.navigate('Home');
+    }
+    else if(country==="" || city===""){
+      Alert.alert("pls fill all");
+    }  
+}
+
 
 
  return (
@@ -159,8 +165,8 @@ const dispatch=useDispatch();
   />
       </View>
 
-      <View style={{marginVertical:230,}}>
-      <AddButton  buttonText={'Add Trip'} onPress={handelAddTrip}/>
+      <View style={{marginVertical:Platform.OS ==="ios"?230:80,}}>
+      <AddButton buttonText={'Add Trip'} onPress={handelAddTrip}/>
       </View>
      
     </View>
@@ -184,7 +190,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
     elevation: 2,
   },
   item: {

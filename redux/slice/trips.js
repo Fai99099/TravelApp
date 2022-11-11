@@ -13,24 +13,33 @@ export const tripSlice = createSlice({
       state.trips = [...state.trips, action.payload];
     },
     addExpense: (state, action) => {
-      console.log("addExpense", action.payload);
       const tripId = action.payload.tripId;
-      console.log("tripId", tripId);
       const tripOfExpenses=state.trips.find(trip=>trip.id===tripId);
-      console.log("TripOfExpenses", tripOfExpenses);
-      tripOfExpenses.expenses=tripOfExpenses.expenses.concat(action.payload.expense);
+      tripOfExpenses.expenses=[...tripOfExpenses.expenses, action.payload.expense];
       const tripOfExpensesIndex = state.trips.findIndex(trip=>trip.id===tripId);
-      console.Consolelog("TripOfExpensesIndex", tripOfExpensesIndex);
-      state.trips[tripOfExpensesIndex]=tripOfExpenses
-      // state.trips = state.trips.map(trip => {
-      //   if (trip.id === tripId) {
-      //     trip.expenses = [...trip.expenses, action.payload.expense];
-      //   }
-      //   return trip;
-      // });
+      state.trips[tripOfExpensesIndex] = tripOfExpenses;
+    },
+    updateExpense: (state, action) => {
+      const tripId = action.payload.tripId;
+      let expenseId = action.payload.newExpense.id ;
+      console.log("the shape of trips object" , state.trips)
+      console.log("redux",expenseId)
+      //! single trip 
+      let trip =state.trips.find(trip=>trip.id===tripId);
+      let tripIndex =state.trips.findIndex(trip=>trip.id===tripId);
+      //! get the expenses array 
+      let triptExpensesIndex = trip.expenses.findIndex((exp) => exp.id === expenseId)
+      state.trips[tripIndex].expenses[triptExpensesIndex] =  action.payload.newExpense
+    
+      console.log("the new  shape of trips object" , state.trips)
+    
+
+
+      
+     
     },
   },
 });
 console.log(addExpense)
-export const { addExpense, addTrip } = tripSlice.actions;
+export const { addExpense, addTrip,updateExpense } = tripSlice.actions;
 export default tripSlice.reducer;

@@ -9,54 +9,20 @@ import React from "react";
 import BackIcon from "react-native-vector-icons/Ionicons";
 import ScreenWrapper from "../components/screen-wrapper";
 import ExpenseCard from "../components/Trips/expense-card";
-import {amount} from "../components/Trips/expense-card";
+//import {amount} from "../components/Trips/expense-card";
 import EmptyExpense from "../components/Trips/empty-expense";
 import { useSelector } from "react-redux";
 //import trips from "../redux/slice/trips";
 
 const TripExpenses = ({ navigation, route }) => {
    const selectedTrip = route.params;
-
-  // const expenses = useSelector(state => {
-  //   const trips = state.trips.trips;
-  //   const expensesToBeShown = trips.filter(
-  //     trip => trip.id === selectedTrip.id
-
-  //   );
-  //   if (expensesToBeShown.length > 0) {
-  //     return expensesToBeShown[0].expenses;
-  //   }
-  //    return [];
-
-  // });
+  console.log("selectedTrip",selectedTrip)
   
-  const allTrips=useSelector(state =>state.trips);
-  const expenses=selectedTrip.expenses;
-  console.log("selectedTrip",selectedTrip);
-  console.log("allExpenses",expenses);
+  const allTrips=useSelector(state =>state.trips.trips);
 
-const Mockdata=[
-  // {
-  //   id:1,
-  //   title:"bought apple",
-  //   category:"Food",
-  //   amount:200,
-  // },
-  // {
-  //   id:2,
-  //   title:"skyday",
-  //   category:"Entertainment",
-  //   amount:200,
-  // },
-  // {
-  //   id:3,
-  //   title:"bought apple",
-  //   category:"Shopping",
-  //   amount:200,
-  // },
- ];
-// const [expenseData, setdata] = useState(Mockdata);
-// const[isRender,setisRender]=useState(false);
+  const expenses = allTrips.find(trip => trip.id === selectedTrip.id).expenses;
+  console.log("expencee",expenses)
+
   return (
     <ScreenWrapper>
       <View>
@@ -93,7 +59,7 @@ const Mockdata=[
               showsVerticalScrollIndicator={false}
               data={expenses}
               renderItem={({ item }) =>
-               <ExpenseCard expense={item} />  
+               <ExpenseCard expense={item} tripId={selectedTrip.id} />  
              }
             //  extraData={isRender}
               keyExtractor={item => item.id}

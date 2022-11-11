@@ -13,7 +13,8 @@ import EmptyList from "../components/home/empty-list";
 import { useSelector } from "react-redux";
 
 const Home = ({ navigation }) => {
-  const tripList = useSelector(state=>state.trips.trips);
+ const tripList = useSelector(state=>state.trips.trips);
+  console.log('tripList: ', tripList);
   return (
     <ScreenWrapper>
       <View>

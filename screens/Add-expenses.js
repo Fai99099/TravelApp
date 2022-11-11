@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import ScreenWrapper from "../components/screen-wrapper";
@@ -14,14 +15,19 @@ import { addExpense } from "../redux/slice/trips";
 
  const AddExpenses = ({ navigation, route }) => {
   const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
+  //const [errorMes, setEroorMes] =useState("");
   // const [categoryName, setCategoryName] = useState("");
   // const [amountNumber, setAmountNumber] = useState(0);
   const selectedTrip = route.params;
 
+
+
   const dispatch = useDispatch();
 
    const  handeleExpeneseAdded = () => {
+ if(amount!=="" && category!==""){
+  
     const expense = {
       id: Date.now(),
       category,
@@ -31,13 +37,15 @@ import { addExpense } from "../redux/slice/trips";
       tripId: selectedTrip.id,
       expense,
     };
-    //console.log("data",data);
-    console.log("selectedTrip",selectedTrip);
+   
     dispatch(addExpense(data));
     navigation.navigate("Trip Expenses", selectedTrip);
-    console.log("expenses",expense);
-  };
 
+ }
+else if(amount==="" || category===""){
+  Alert.alert("pls fill all");
+}
+  };
 
   const Category = [
     "Food",
@@ -110,7 +118,9 @@ import { addExpense } from "../redux/slice/trips";
             <Text style={styles.labelPrice}>How Much?</Text>
             <TextInput
               value={amount}
-              onChangeText={(e) => setAmount(Number(e))}
+              //secureTextEntry={true}
+             // keyboardType="number-pad"
+              onChangeText={(e) => setAmount(e.replace(/[^0-9]/g,""))}
               style={styles.input}
             />
           </View>
@@ -120,7 +130,7 @@ import { addExpense } from "../redux/slice/trips";
     </ScreenWrapper>
   );
 };
-
+//(e) => setAmount(Number(e))
 export default AddExpenses;
 
 const styles = StyleSheet.create({
@@ -157,12 +167,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
     elevation: 2,
   },
   categoryOptions: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection:"row",
     marginTop: 12,
     flexWrap: "wrap",
   },
@@ -171,9 +180,9 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   form: {
-   justifyContent: "space-between",
+    justifyContent: "space-between",
     margin: 30,
-height: "45%",
+    height: "45%",
     marginBottom: 0,
 
   },
