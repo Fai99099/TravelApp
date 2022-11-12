@@ -7,8 +7,7 @@ export const Thumbnails = {
   3: require("./image/3t.jpg"),
   4: require("./image/4t.jpg"),
   5: require("./image/5t.jpg"),
-  6: require("./image/6t.jpg"),
-  7: require("./image/7t.jpg"),
+  6: require("./image/7t.jpg"),
   
 };
 

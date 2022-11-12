@@ -13,7 +13,7 @@ import AddButton from "../components/add-butt";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../redux/slice/trips";
 
- const AddExpenses = ({ navigation, route }) => {
+const AddExpenses = ({ navigation, route }) => {
   const [category, setCategory] = useState("");
   const [amount, setAmount] = useState("");
   //const [errorMes, setEroorMes] =useState("");
@@ -21,30 +21,25 @@ import { addExpense } from "../redux/slice/trips";
   // const [amountNumber, setAmountNumber] = useState(0);
   const selectedTrip = route.params;
 
-
-
   const dispatch = useDispatch();
 
-   const  handeleExpeneseAdded = () => {
- if(amount!=="" && category!==""){
-  
-    const expense = {
-      id: Date.now(),
-      category,
-      amount, 
-    };
-    const data = {
-      tripId: selectedTrip.id,
-      expense,
-    };
-   
-    dispatch(addExpense(data));
-    navigation.navigate("Trip Expenses", selectedTrip);
+  const handeleExpeneseAdded = () => {
+    if (amount !== "" && category !== "") {
+      const expense = {
+        id: Date.now(),
+        category,
+        amount,
+      };
+      const data = {
+        tripId: selectedTrip.id,
+        expense,
+      };
 
- }
-else if(amount==="" || category===""){
-  Alert.alert("pls fill all");
-}
+      dispatch(addExpense(data));
+      navigation.navigate("Trip Expenses", selectedTrip);
+    } else if (amount === "" || category === "") {
+      Alert.alert("Can't be Added, please fill all");
+    }
   };
 
   const Category = [
@@ -61,9 +56,8 @@ else if(amount==="" || category===""){
     <ScreenWrapper>
       <View
         style={{
+          justifyContent: "space-between",
           height: "100%",
-         justifyContent: "space-between",
-
         }}
       >
         <View
@@ -90,26 +84,27 @@ else if(amount==="" || category===""){
           <View style={styles.formItem}>
             <Text style={styles.label}>Category</Text>
             <View style={styles.categoryOptions}>
-              {Category.map(catg  => (
+              {Category.map((catg) => (
                 <View key={catg}>
-                <TouchableOpacity
-                  style={{
-                    ...styles.category,
-                    backgroundColor:
-                      category === catg ? "rgba(120, 181, 204, 0.9)" : "white",
-                  }}
-                  onPress={() => setCategory(catg)}
-                  
-                >
-                  <Text
+                  <TouchableOpacity
                     style={{
-                      ...styles.categoryLabel,
-                      color: category == catg ? "white" : "black",
+                      ...styles.category,
+                      backgroundColor:
+                        category === catg
+                          ? "rgba(120, 181, 204, 0.9)"
+                          : "white",
                     }}
+                    onPress={() => setCategory(catg)}
                   >
-                    {catg}
-                  </Text>
-                </TouchableOpacity>
+                    <Text
+                      style={{
+                        ...styles.categoryLabel,
+                        color: category == catg ? "white" : "black",
+                      }}
+                    >
+                      {catg}
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               ))}
             </View>
@@ -119,13 +114,16 @@ else if(amount==="" || category===""){
             <TextInput
               value={amount}
               //secureTextEntry={true}
-             // keyboardType="number-pad"
-              onChangeText={(e) => setAmount(e.replace(/[^0-9]/g,""))}
+              //keyboardType="number-pad"
+              onChangeText={(text) => setAmount(text.replace(/[^0-9]/g, ""))}
+              //onChangeText={(text) => setAmount(text)}
               style={styles.input}
             />
           </View>
         </View>
-        <AddButton onPress={handeleExpeneseAdded} />
+        <View style={styles.btn}>
+          <AddButton onPress={handeleExpeneseAdded} />
+        </View>
       </View>
     </ScreenWrapper>
   );
@@ -171,7 +169,7 @@ const styles = StyleSheet.create({
   },
   categoryOptions: {
     display: "flex",
-    flexDirection:"row",
+    flexDirection: "row",
     marginTop: 12,
     flexWrap: "wrap",
   },
@@ -183,8 +181,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     margin: 30,
     height: "45%",
-    marginBottom: 0,
-
+    marginBottom: 20,
   },
   formItem: {
     marginVertical: -14,
@@ -197,6 +194,14 @@ const styles = StyleSheet.create({
     color: "gray",
     paddingHorizontal: 17,
   },
+  // btn: {
+  //   borderColor: "red",
+  //   borderWidth: 1,
+
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginTop: 0,
+  // },
   labelPrice: {
     // paddingBottom:18,
 

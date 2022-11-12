@@ -12,16 +12,32 @@ import ExpenseCard from "../components/Trips/expense-card";
 //import {amount} from "../components/Trips/expense-card";
 import EmptyExpense from "../components/Trips/empty-expense";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 //import trips from "../redux/slice/trips";
 
 const TripExpenses = ({ navigation, route }) => {
-   const selectedTrip = route.params;
-  console.log("selectedTrip",selectedTrip)
-  
-  const allTrips=useSelector(state =>state.trips.trips);
+  const selectedTrip = route.params;
+  console.log("selectedTrip", selectedTrip);
+  const [total, setTotal] = useState(0);
 
-  const expenses = allTrips.find(trip => trip.id === selectedTrip.id).expenses;
-  console.log("expencee",expenses)
+  const allTrips = useSelector((state) => state.trips.trips);
+
+  const expenses = allTrips.find(
+    (trip) => trip.id === selectedTrip.id
+  ).expenses;
+
+  console.log("expencee", expenses);
+
+  const caclTotalExp = (expenses = []) => {
+    let total = 0;
+    expenses.forEach((exp) => (total += Number(exp.amount)));
+    setTotal(total);
+  };
+
+  useEffect(() => {
+    caclTotalExp(expenses);
+  }, [expenses]);
 
   return (
     <ScreenWrapper>
@@ -58,14 +74,13 @@ const TripExpenses = ({ navigation, route }) => {
             <FlatList
               showsVerticalScrollIndicator={false}
               data={expenses}
-              renderItem={({ item }) =>
-               <ExpenseCard expense={item} tripId={selectedTrip.id} />  
-             }
-            //  extraData={isRender}
-              keyExtractor={item => item.id}
+              renderItem={({ item }) => (
+                <ExpenseCard expense={item} tripId={selectedTrip.id} />
+              )}
+              keyExtractor={(item) => item.id}
               ListEmptyComponent={<EmptyExpense />}
             />
-           {/*<Text>total: {amount+1}</Text>*/}
+            <Text style={styles.Total}>Total: {total}</Text>
           </View>
         </View>
       </View>
@@ -119,5 +134,11 @@ const styles = StyleSheet.create({
     height: 460,
     paddingTop: 0,
     padding: 0,
+  },
+  Total: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "gray",
+    paddingLeft: 290,
   },
 });

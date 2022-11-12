@@ -1,32 +1,32 @@
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React from "react";
 
-const AddButton = props => {
-    const{buttonText,onPress}=props;
+const AddButton = (props) => {
+  const { buttonText, onPress } = props;
   return (
     <TouchableOpacity onPress={onPress}>
-    <View style={styles.addBtt}>
-      <Text style={styles.buttText}>{buttonText? buttonText:"ADD"}</Text>
-    </View>
+      <View style={styles.addBtt}>
+        <Text style={styles.buttText}>{buttonText ? buttonText : "ADD"}</Text>
+      </View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export default AddButton
+export default AddButton;
 
 const styles = StyleSheet.create({
-  addBtt:{
-    backgroundColor:'rgba(120, 181, 204, 0.9)',
-    borderRadius:20,
-    marginLeft:100,
-    paddingVertical:10,
+  addBtt: {
+    backgroundColor: "rgba(120, 181, 204, 0.9)",
+    borderRadius: 20,
+    marginLeft: 100,
+    paddingVertical: 10,
     //display:"flex",
     alignItems: "center",
-    width:"50%",
-  } , 
-  buttText:{
-      color:'white',
-      fontWeight:'600',
-      fontSize:26,
+    width: 200,
+  },
+  buttText: {
+    color: "white",
+    fontWeight: "600",
+    fontSize: 26,
   },
 });
