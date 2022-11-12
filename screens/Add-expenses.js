@@ -62,7 +62,7 @@ const AddExpenses = ({ navigation, route }) => {
       >
         <View
           style={{
-            backgroundColor: "rgba(120, 181, 204, 0.9)",
+            backgroundColor: "#05A4C8",
             height: 270,
             borderBottomLeftRadius: 40,
             borderBottomRightRadius: 40,
@@ -89,10 +89,7 @@ const AddExpenses = ({ navigation, route }) => {
                   <TouchableOpacity
                     style={{
                       ...styles.category,
-                      backgroundColor:
-                        category === catg
-                          ? "rgba(120, 181, 204, 0.9)"
-                          : "white",
+                      backgroundColor: category === catg ? "#00E194" : "white",
                     }}
                     onPress={() => setCategory(catg)}
                   >
@@ -139,7 +136,7 @@ const styles = StyleSheet.create({
   subHeading: {
     fontSize: 18,
     fontWeight: "600",
-    color: "rgba(120, 181, 204, 0.9)",
+    color: "#05A4C8",
     textAlign: "center",
   },
   subHeadingContainar: {

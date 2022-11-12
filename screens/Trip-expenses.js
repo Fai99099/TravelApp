@@ -44,7 +44,7 @@ const TripExpenses = ({ navigation, route }) => {
       <View>
         <View
           style={{
-            backgroundColor: "rgba(120, 181, 204, 0.9)",
+            backgroundColor: "#05A4C8",
             height: 270,
             borderBottomLeftRadius: 40,
             borderBottomRightRadius: 40,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   city: {
     textAlign: "center",
-    color: "rgba(120, 181, 204, 0.9)",
+    color: "#05A4C8",
     fontSize: 20,
     fontWeight: "700",
   },
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     marginLeft: 100,
   },
   btnText: {
-    color: " rgba(120, 181, 204, 0.9)",
-    fontWeight: "700",
+    color: "#05A4C8",
+    fontWeight: "800",
   },
   txtBtn: {
     flexDirection: "row",

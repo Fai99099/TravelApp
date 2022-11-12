@@ -16,7 +16,7 @@ export default AddButton;
 
 const styles = StyleSheet.create({
   addBtt: {
-    backgroundColor: "rgba(120, 181, 204, 0.9)",
+    backgroundColor: "#05A4C8",
     borderRadius: 20,
     marginLeft: 100,
     paddingVertical: 10,

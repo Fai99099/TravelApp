@@ -110,7 +110,7 @@ const AddTrip = ({ navigation }) => {
       <View style={styles.addTripWrapper}>
         <View
           style={{
-            backgroundColor: "rgba(120, 181, 204, 0.9)",
+            backgroundColor: "#05A4C8",
             height: 270,
             borderBottomLeftRadius: 40,
             borderBottomRightRadius: 40,
